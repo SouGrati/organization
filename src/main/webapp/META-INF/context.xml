@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <Resource name="jdbc/TestDb"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="org.sqlite.JDBC"
+    	url="jdbc:sqlite:/Users/air/Downloads/sts-bundle/pivotal-tc-server-developer-3.2.2.RELEASE/tomcat-8.5.6.B.RELEASE/db/Test.db"
+    	factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+    />
+</Context>

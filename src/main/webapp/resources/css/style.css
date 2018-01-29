@@ -1,0 +1,70 @@
+.logoList img{
+	height: 7%;
+	display: block;
+    margin: 0 auto;
+}
+
+.footer img{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: 10%;
+	right: 0;
+}
+
+.bleuTitle{
+	color: #00caf5;
+	text-align: center;
+}
+
+#sidebar-wrapper {
+  top: 0;
+  left: -200px;
+  width: 200px;
+  background-color: #00caf5;
+  color: white;
+  position: fixed;
+  height: 100%;
+  z-index: 0;
+}
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  width: 250px;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 50px;
+}
+.sidebar-nav li a {
+  color: white;
+  display: block;
+  text-decoration: none;
+}
+.sidebar-nav li a:hover {
+  background: rgba(255,255,255,0.25);
+  color: white;
+  text-decoration: none;
+}
+.sidebar-nav li a:active, .sidebar-nav li a:focus {
+  text-decoration: none;
+}
+#sidebar-wrapper.sidebar-toggle {
+  transition: all 0.3s ease-out;
+  margin-left: -200px;
+}
+@media (min-width: 768px) {
+  #sidebar-wrapper.sidebar-toggle {
+    transition: 0s;
+    left: 200px;
+  }
+}
+.sousMenu li{
+	font-size: 11px;
+	margin: -12px -15px;
+	list-style: none;
+	text-decoration: underline;
+}
