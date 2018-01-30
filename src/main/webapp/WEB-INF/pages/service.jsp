@@ -26,21 +26,21 @@
 			<c:if test="${not empty msgOrgAdded}">
 				<div class="alert alert-success" role="alert">${msgOrgAdded}</div>
 			</c:if>
-			<h5>Create a new organization</h5>
-			<c:url var="addOrganization" value="/addOrganization"/>
-			<form:form method="post" modelAttribute="organization" action="${addOrganization}">
+			<h5>Create a new service</h5>
+			<c:url var="addService" value="/addService"/>
+			<form:form method="post" modelAttribute="object" action="${addService}">
 				<div class="form-group row">
-					<label for="staticEmail" class="col-sm-4 col-form-label">Organization Name</label>
+					<label for="staticEmail" class="col-sm-4 col-form-label">Service Name</label>
 					<div class="col-sm-8">
-						<form:input path="nameOrganization" type="text" class="form-control" id="inputName"
-							placeholder="Organization Name"/>
+						<form:input path="object_name" type="text" class="form-control" id="inputName"
+							placeholder="Service Name"/>
 					</div>
 				</div>
 				<div class="form-group row">
-					<label for="inputPassword" class="col-sm-4 col-form-label">Coalition Name</label>
+					<label for="inputPassword" class="col-sm-4 col-form-label">Service url</label>
 					<div class="col-sm-8">
-						<form:input path="coalition.coalitionName" type="text" class="form-control" id="inputCoalName"
-							placeholder="Coalition Name"/>
+						<form:input path="object_path" type="text" class="form-control" id="inputCoalName"
+							placeholder="Service Url"/>
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary mb-2">Submit</button>

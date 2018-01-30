@@ -20,12 +20,37 @@ public class OrganizationDaoImpl implements OrganizationDao {
 	
 	@Override
 	public void addOrganization(Organization organization) {
-		String sql = "insert into organization(organization_name) values (?)";
+		String sqlOrg = "insert into organization(organization_name) values (?)";
+		String sqlCoalition = "insert into coalition(coalition_name) values (?)";
+		String sqlParticipatesIn = "insert into participatesIn(organization_id,coalition_id) values (?,?)";
 		Connection connection = DbUtil.getConnection();
 		try {
-			PreparedStatement pstmt = connection.prepareStatement(sql);
+			int idOrg = 0, idCoa = 0;
+			// insert Organization
+			PreparedStatement pstmt = connection.prepareStatement(sqlOrg);
 			pstmt.setString(1, organization.getNameOrganization());
 			pstmt.executeUpdate();
+			ResultSet rsOrg = pstmt.getGeneratedKeys();
+			if (rsOrg.next()) {
+				idOrg = rsOrg.getInt(1);
+			}
+			// insert Coalition
+			PreparedStatement pstmt2 = connection.prepareStatement(sqlCoalition);
+			pstmt2.setString(1, organization.getCoalition().getCoalitionName());
+			pstmt2.executeUpdate();
+			ResultSet rsCoa = pstmt2.getGeneratedKeys();
+			if (rsCoa.next()) {
+				idCoa = rsCoa.getInt(1);
+			}
+			// insert ParticipatesIn (organization_id, coalition_id)
+			if(idOrg == 0 || idCoa == 0){
+				throw new SQLException("Organization or Coalition not inserted correctly.");
+			} else {
+				PreparedStatement pstmt3 = connection.prepareStatement(sqlParticipatesIn);
+				pstmt3.setInt(1, idOrg);
+				pstmt3.setInt(2, idCoa);
+				pstmt3.executeUpdate();
+			}
 		} catch (SQLException e) {
 			LOGGER.debug(e.toString());
 		}

@@ -1,5 +1,7 @@
 package lu.list.organization.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lu.list.organization.dao.OrganizationDao;
@@ -13,6 +15,21 @@ public class OrganizationServiceImpl implements OrganizationService {
 	@Override
 	public void addOrganization(Organization organization) {
 		organizationDao.addOrganization(organization);
+	}
+
+	@Override
+	public List<Organization> getAllOrganization() {
+		return organizationDao.getAllOrganization();
+	}
+
+	@Override
+	public Organization getOrganizationById(int id) {
+		return organizationDao.getOrganizationById(id);
+	}
+
+	@Override
+	public void updateOrganization(Organization organization) {
+		organizationDao.updateOrganization(organization);
 	}
 
 }

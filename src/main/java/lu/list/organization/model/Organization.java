@@ -4,6 +4,7 @@ public class Organization {
 	
 	private int idOrganization;
 	private String nameOrganization;
+	private Coalition coalition;
 	
 	public int getIdOrganization() {
 		return idOrganization;
@@ -16,6 +17,12 @@ public class Organization {
 	}
 	public void setNameOrganization(String nameOrganization) {
 		this.nameOrganization = nameOrganization;
+	}
+	public Coalition getCoalition() {
+		return coalition;
+	}
+	public void setCoalition(Coalition coalition) {
+		this.coalition = coalition;
 	}
 	
 }

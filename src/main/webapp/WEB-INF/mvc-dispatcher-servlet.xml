@@ -14,6 +14,10 @@
 	
 	<bean id="organizationDao" class="lu.list.organization.dao.OrganizationDaoImpl"/>
 	<bean id="organizationService" class="lu.list.organization.service.OrganizationServiceImpl"/>
+	<bean id="subjectDao" class="lu.list.organization.dao.SubjectDaoImpl"/>
+	<bean id="subjectService" class="lu.list.organization.service.SubjectServiceImpl"/>
+	<bean id="objectDao" class="lu.list.organization.dao.ObjectDaoImpl"/>
+	<bean id="objectService" class="lu.list.organization.service.ObjectServiceImpl"/>
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
