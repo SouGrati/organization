@@ -20,7 +20,8 @@ public class ServiceAgent {
 		if (day>5) { //Week-end
 			return new Context(3);
 		} else if ((hour < 7) || (hour > 20)) { //Night
-			return new Context(2);
+			//FIXME 
+			return new Context(1);
 		} else { //Day
 			return new Context(1);
 		}

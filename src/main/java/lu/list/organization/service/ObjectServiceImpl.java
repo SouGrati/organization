@@ -21,5 +21,10 @@ public class ObjectServiceImpl implements ObjectService {
 	public List<OObject> getAllObjects() {
 		return objectDao.getAllObjects();
 	}
+
+	@Override
+	public OObject getObjectById(int idObject) {
+		return objectDao.getObjectById(idObject);
+	}
 	
 }

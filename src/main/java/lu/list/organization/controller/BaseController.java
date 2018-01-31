@@ -215,7 +215,11 @@ public class BaseController {
 					if (rule == 0) {
 						model.addAttribute("msgAccess","Problem occured while verifying access permission.");
 					} else {
-						model.addAttribute("msgAccess",rule);
+						if( rule == 4) {
+							return "redirect:" + objectService.getObjectById(idObject).getObject_path();
+						} else {
+							model.addAttribute("msgAccess","Access Denied");
+						}
 					}
 				} catch (Exception e) {
 					model.addAttribute("msgAccess","Problem occured while verifying access permission.");

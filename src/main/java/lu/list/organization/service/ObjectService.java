@@ -9,4 +9,6 @@ public interface ObjectService {
 	void addObject(OObject object);
 	
 	List<OObject> getAllObjects();
+
+	OObject getObjectById(int idObject);
 }

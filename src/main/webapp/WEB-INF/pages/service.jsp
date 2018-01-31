@@ -51,10 +51,10 @@
 			<ul class="sidebar-nav">
 				<li><a href="#item1">Service Options</a>
 					<ul class="sousMenu">
-						<li><a href="${pageContext.request.contextPath}/">Register a New Coalition</a></li>
-						<li><a href="${pageContext.request.contextPath}/addService">Register Service</a></li>
+						<c:if test="${sessionScope.user.admin}"><li><a href="${pageContext.request.contextPath}/">Register a New Organization</a></li></c:if>
+						<c:if test="${sessionScope.user.admin}"><li><a href="${pageContext.request.contextPath}/addService">Register Service</a></li></c:if>
 						<li><a href="${pageContext.request.contextPath}/allServices">Get All Services</a></li>
-						<li><a href="${pageContext.request.contextPath}/allOrganizations">Get All Orgnizations</a></li>
+						<c:if test="${sessionScope.user.admin}"><li><a href="${pageContext.request.contextPath}/allOrganizations">Get All Orgnizations</a></li></c:if>
 					</ul></li>
 				<li><a href="#item3">Membership Options</a>
 					<ul class="sousMenu">

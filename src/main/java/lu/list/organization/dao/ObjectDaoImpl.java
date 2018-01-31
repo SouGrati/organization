@@ -59,4 +59,30 @@ public class ObjectDaoImpl implements ObjectDao {
 		return listObjects;
 	}
 
+	@Override
+	public OObject getObjectById(int idObject) {
+		OObject object = null;
+		
+		String sql = "select * from object where object_id = ?";
+		Connection connection = DbUtil.getConnection();
+        
+		try {
+			PreparedStatement pstmt = connection.prepareStatement(sql);
+			pstmt.setInt(1, idObject);
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				object = new OObject();
+				object.setObject_id(idObject);
+				object.setObject_name(rs.getString("object_name"));
+				object.setObject_path(rs.getString("object_path"));
+				object.setOrganization_id(rs.getInt("organization_id"));
+			}
+		} catch (SQLException e) {
+			LOGGER.debug(e.toString());
+		}
+		
+		return object;
+	}
+
 }

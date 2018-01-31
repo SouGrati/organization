@@ -10,4 +10,6 @@ public interface ObjectDao {
 
 	List<OObject> getAllObjects();
 
+	OObject getObjectById(int idObject);
+
 }
