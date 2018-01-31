@@ -68,7 +68,7 @@
 					<ul class="sousMenu">
 						<li><a href="${pageContext.request.contextPath}/">Register a New Coalition</a></li>
 						<li><a href="${pageContext.request.contextPath}/addService">Register Service</a></li>
-						<li>Get All Services</li>
+						<li><a href="${pageContext.request.contextPath}/allServices">Get All Services</a></li>
 						<li><a href="${pageContext.request.contextPath}/allOrganizations">Get All Orgnizations</a></li>
 					</ul></li>
 				<li><a href="#item3">Membership Options</a>

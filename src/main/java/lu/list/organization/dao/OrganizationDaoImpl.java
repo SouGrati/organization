@@ -91,7 +91,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
 		try {
 			PreparedStatement pstmt = connection.prepareStatement(sql);
 			pstmt.setInt(1, id);
-			ResultSet rs = pstmt.executeQuery(sql);
+			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				organization = new Organization();

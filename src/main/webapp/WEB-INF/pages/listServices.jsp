@@ -1,18 +1,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/style.css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" />
+<%-- <script type="javascript" src="${pageContext.request.contextPath}/resources/bootstrap/js/jquery.min.js"></script> --%>
+<script type="text/javascript"
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="javascript"
 	src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<ul class="nav justify-content-end">
-		<li class="nav-item nav-link active">User connected : ${sessionScope.user.subject_name}, 
-			Organization n°${sessionScope.user.organization_id}</li>
+		<li class="nav-item nav-link active">User connected : ${sessionScope.user.subject_name}</li>
 		<li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/logOut">Log out</a></li>
 	</ul>
 	<div class="logoList" style="margin-left: 12%;">
@@ -21,31 +24,37 @@
 	</div>
 	<div class="container">
 		<h4 class="bleuTitle" style="margin-left: 12%;">Dynamic Coalitions App</h4>
-		<div style="margin-left: 25%">
+		<div style="margin-left: 28%;width: 65%;">
 		<br/>
-			<c:if test="${not empty msgObjAdded}">
-				<div class="alert alert-success" role="alert">${msgObjAdded}</div>
+			<c:if test="${not empty msgAccess}">
+				<div class="alert alert-warning" role="alert">${msgAccess}</div>
 			</c:if>
-			<h5>Create a new service</h5>
-			<c:url var="addService" value="/addService"/>
-			<form:form method="post" modelAttribute="object" action="${addService}">
-				<div class="form-group row">
-					<label for="staticEmail" class="col-sm-4 col-form-label">Service Name</label>
-					<div class="col-sm-8">
-						<form:input path="object_name" type="text" class="form-control" id="inputName"
-							placeholder="Service Name"/>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="inputPassword" class="col-sm-4 col-form-label">Service url</label>
-					<div class="col-sm-8">
-						<form:input path="object_path" type="text" class="form-control" id="inputCoalName"
-							placeholder="Service Url"/>
-					</div>
-				</div>
-				<button type="submit" class="btn btn-primary mb-2">Submit</button>
-			</form:form>
+			<h5>List of services</h5>
+			<table class="table table-striped" style="margin-bottom:6rem">
+			<thead>
+				<tr>
+					<th>#ID</th>
+					<th>Name</th>
+					<th>Url</th>
+					<th>Action</th>
+				</tr>
+			</thead>
 
+			<c:forEach var="obj" items="${listObjects}">
+		    	<tr>
+					<td>${obj.object_id}</td>
+					<td>${obj.object_name}</td>
+					<td>${obj.object_path}</td>
+					<td>
+						<spring:url value="/accessService?idObject=${obj.object_id}&idAction=1" var="modifySys" /> 
+						<spring:url value="/accessService?idObject=${obj.object_id}&idAction=4" var="viewMonitoring" />
+	
+						<button class="btn btn-primary" onclick="location.href='${modifySys}'">Modify System</button>
+						<button class="btn btn-info" onclick="location.href='${viewMonitoring}'">View Monitoring</button>
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
 		</div>
 		<div id="sidebar-wrapper" class="sidebar-toggle">
 			<ul class="sidebar-nav">
@@ -69,3 +78,4 @@
 	</div>
 </body>
 </html>
+

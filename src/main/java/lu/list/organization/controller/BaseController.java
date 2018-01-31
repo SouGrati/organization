@@ -22,6 +22,7 @@ import lu.list.organization.model.Subject;
 import lu.list.organization.service.ObjectService;
 import lu.list.organization.service.OrganizationService;
 import lu.list.organization.service.SubjectService;
+import lu.list.organization.service.agent.ServiceAgent;
 
 @Controller
 public class BaseController {
@@ -29,6 +30,7 @@ public class BaseController {
 		private static final String VIEW_INDEX = "index";
 		private static final String VIEW_LOGIN = "login";
 		private static final String VIEW_SERVICE = "service";
+		private static final String VIEW_LIST_SERVICES = "listServices";
 		private static final String VIEW_LIST_ORGANIZATIONS = "listOrganizations";
 		private final static Logger LOGGER = LoggerFactory.getLogger(BaseController.class);
 		
@@ -156,7 +158,7 @@ public class BaseController {
 			object.setOrganization_id(user.getOrganization_id());
 			objectService.addObject(object);
 			
-			model.addAttribute("msgServiceAdded", "Service has been added.");
+			model.addAttribute("msgObjAdded", "Service has been added.");
 
 			LOGGER.debug("Insret object into DB : " + object.getObject_name());
 
@@ -178,5 +180,52 @@ public class BaseController {
 			
 			return VIEW_SERVICE;
 		}
+		
+		@RequestMapping(value = "/allServices", method = RequestMethod.GET)
+		public String getAllObjects(ModelMap model, HttpServletRequest request) {
+			
+			HttpSession session =request.getSession();
+			
+			Subject user = (Subject) session.getAttribute("user");
+			
+			if (user != null) {
+				model.addAttribute("listObjects",objectService.getAllObjects());
+				return VIEW_LIST_SERVICES;
+			} else {
+				return "redirect:/login";
+			}
 
+		}
+		
+		@RequestMapping(value = "/accessService", method = RequestMethod.GET)
+		public String accessService(ModelMap model, HttpServletRequest request,
+				@RequestParam("idObject") int idObject, @RequestParam("idAction") int idAction) {
+			
+			HttpSession session =request.getSession();
+			Subject user = (Subject) session.getAttribute("user");
+			
+			if (user != null) {
+				Organization organizationById = organizationService.getOrganizationById(user.getOrganization_id());
+				lu.list.organization.service.agent.Organization organization= new lu.list.organization.service.agent.Organization();
+				organization.setOrganizationId(organizationById.getIdOrganization());
+				organization.setOrganizationName(organizationById.getNameOrganization());
+				ServiceAgent serviceAgent = new ServiceAgent(organization);
+				try {
+					int rule = serviceAgent.access(user.getSubject_id(), idObject, idAction).getRule();
+					if (rule == 0) {
+						model.addAttribute("msgAccess","Problem occured while verifying access permission.");
+					} else {
+						model.addAttribute("msgAccess",rule);
+					}
+				} catch (Exception e) {
+					model.addAttribute("msgAccess","Problem occured while verifying access permission.");
+					LOGGER.debug(e.toString());
+				}
+				model.addAttribute("listObjects",objectService.getAllObjects());
+				return VIEW_LIST_SERVICES;
+			} else {
+				return "redirect:/login";
+			}
+
+		}
 }

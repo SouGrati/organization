@@ -1,5 +1,7 @@
 package lu.list.organization.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lu.list.organization.dao.ObjectDao;
@@ -13,6 +15,11 @@ public class ObjectServiceImpl implements ObjectService {
 	@Override
 	public void addObject(OObject object) {
 		objectDao.addObject(object);
+	}
+
+	@Override
+	public List<OObject> getAllObjects() {
+		return objectDao.getAllObjects();
 	}
 	
 }
